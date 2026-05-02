@@ -117,6 +117,7 @@ export function Header() {
           <motion.span
             style={{
               display: "inline-block",
+              padding: "0 0.2em",
               letterSpacing,
               rotateX,
               scale,
