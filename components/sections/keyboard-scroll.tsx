@@ -122,32 +122,47 @@ export function KeyboardScroll() {
     let loaded = 0;
     const imgs: HTMLImageElement[] = [];
 
-    for (let i = 0; i < TOTAL_FRAMES; i++) {
-      const img = new Image();
-      img.decoding = 'async';
-      img.src = frameUrl(i);
-      img.onload = () => {
-        loaded++;
-        setLoadedCount(loaded);
-        if (loaded === 1) {
+    // 1. Identify which frame we should show FIRST (based on current scroll)
+    const currentProgress = scrollYProgress.get();
+    const initialIndex = Math.round(currentProgress * (TOTAL_FRAMES - 1));
+
+    // 2. Load the initial frame with priority
+    const priorityImg = new Image();
+    priorityImg.src = frameUrl(initialIndex);
+    priorityImg.onload = () => {
+      imgs[initialIndex] = priorityImg;
+      imagesRef.current = imgs;
+      drawFrame(initialIndex);
+      setShowCanvas(true);
+      
+      // 3. Once priority frame is shown, load the rest
+      loadRemaining();
+    };
+    priorityImg.onerror = loadRemaining;
+
+    function loadRemaining() {
+      for (let i = 0; i < TOTAL_FRAMES; i++) {
+        if (i === initialIndex) continue; // Already handled
+        
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = frameUrl(i);
+        img.onload = () => {
+          loaded++;
+          setLoadedCount(loaded + 1); // +1 for the priority frame
+          imgs[i] = img;
           imagesRef.current = imgs;
-          drawFrame(0);
-          setShowCanvas(true);
-        }
-        if (loaded === TOTAL_FRAMES) {
-          imagesRef.current = imgs;
-          setAllLoaded(true);
-        }
-      };
-      img.onerror = () => {
-        loaded++;
-        setLoadedCount(loaded);
-        if (loaded === TOTAL_FRAMES) setAllLoaded(true);
-      };
-      imgs[i] = img;
+          if (loaded + 1 === TOTAL_FRAMES) setAllLoaded(true);
+        };
+        img.onerror = () => {
+          loaded++;
+          setLoadedCount(loaded + 1);
+          if (loaded + 1 === TOTAL_FRAMES) setAllLoaded(true);
+        };
+      }
     }
     imagesRef.current = imgs;
-  }, [drawFrame, resizeCanvas]);
+  }, [drawFrame, resizeCanvas, scrollYProgress]);
 
   // ── Direct scroll → frame (NO spring, zero latency) ──────────────────────
   useEffect(() => {
