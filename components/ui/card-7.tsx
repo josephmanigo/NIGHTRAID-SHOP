@@ -30,6 +30,7 @@ export function InteractiveProductCard({
   const addItem = useCartStore((state) => state.addItem);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [loadedMap, setLoadedMap] = React.useState<Record<number, boolean>>({});
+  const [isTapped, setIsTapped] = React.useState(false);
   const cardRef = React.useRef<HTMLDivElement>(null);
   const autoPlayRef = React.useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -76,6 +77,10 @@ export function InteractiveProductCard({
   return (
     <div
       ref={cardRef}
+      onClick={(e) => {
+        setIsTapped(!isTapped);
+        props.onClick?.(e);
+      }}
       className={cn(
         "group relative w-full overflow-hidden rounded-2xl border border-white/10 bg-black",
         "transition-all duration-300 ease-in-out hover:-translate-y-1 cursor-pointer",
@@ -141,7 +146,7 @@ export function InteractiveProductCard({
         </div>
 
         {/* Middle: Title + Description */}
-        <div className="space-y-2 transition-transform duration-500 ease-in-out group-hover:-translate-y-16">
+        <div className={cn("space-y-2 transition-transform duration-500 ease-in-out group-hover:-translate-y-16", isTapped && "-translate-y-16")}>
           <div>
             <h3 className="text-base font-bold text-white uppercase tracking-tight leading-tight">
               {title}
@@ -159,7 +164,7 @@ export function InteractiveProductCard({
         </div>
 
         {/* Bottom: Price + Button */}
-        <div className="absolute bottom-0 left-0 w-full px-4 pb-4 opacity-0 translate-y-8 transition-all duration-500 ease-in-out group-hover:translate-y-0 group-hover:opacity-100 z-10">
+        <div className={cn("absolute bottom-0 left-0 w-full px-4 pb-4 opacity-0 translate-y-8 transition-all duration-500 ease-in-out group-hover:translate-y-0 group-hover:opacity-100 z-10", isTapped && "translate-y-0 opacity-100")}>
           <div className="flex items-end justify-between">
             <div className="flex flex-col">
               <span className="text-[10px] text-white/50 uppercase tracking-widest">Price</span>

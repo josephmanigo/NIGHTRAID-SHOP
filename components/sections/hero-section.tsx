@@ -204,7 +204,7 @@ export function HeroSection() {
             <div className="flex flex-col items-center text-center">
               {/* Slides in from left */}
               <h2
-                className="text-white text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-normal uppercase will-change-transform notable-regular"
+                className="text-white text-[7vw] md:text-6xl lg:text-7xl xl:text-8xl font-normal uppercase will-change-transform notable-regular whitespace-nowrap"
                 style={{
                   transform: `translateX(${(1 - Math.min(1, (imageProgress - 0.7) * 3.33)) * -100}%)`,
                   transition: 'transform 0.1s linear',
@@ -214,9 +214,9 @@ export function HeroSection() {
               </h2>
               {/* Slides in from right, stays shifted right, overlaps upwards */}
               <h2
-                className="relative z-10 text-[#8b0000] text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-normal uppercase will-change-transform notable-regular"
+                className="relative z-10 text-[#8b0000] text-[7vw] md:text-5xl lg:text-6xl xl:text-7xl font-normal uppercase will-change-transform notable-regular whitespace-nowrap ml-[8vw] md:ml-[15vw]"
                 style={{
-                  transform: `translate(calc(${(1 - Math.min(1, (imageProgress - 0.7) * 3.33)) * 100}% + ${Math.min(1, (imageProgress - 0.7) * 3.33) * 15}vw), ${Math.min(1, (imageProgress - 0.7) * 3.33) * -40}%)`,
+                  transform: `translate(calc(${(1 - Math.min(1, (imageProgress - 0.7) * 3.33)) * 100}%), ${Math.min(1, (imageProgress - 0.7) * 3.33) * -40}%)`,
                   transition: 'transform 0.1s linear',
                 }}
               >

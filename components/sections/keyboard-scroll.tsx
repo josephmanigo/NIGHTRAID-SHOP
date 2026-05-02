@@ -85,11 +85,16 @@ export function KeyboardScroll() {
 
   // ── Draw a single frame ───────────────────────────────────────────────────
   const drawFrame = useCallback((index: number) => {
+    let { w: W, h: H, dpr } = dimRef.current;
+    if (W === 0 || H === 0) {
+      resizeCanvas();
+      W = dimRef.current.w;
+      H = dimRef.current.h;
+    }
+
     const ctx = ctxRef.current;
     const img = imagesRef.current[index];
-    if (!ctx || !img?.complete || img.naturalWidth === 0) return;
-
-    const { w: W, h: H, dpr } = dimRef.current;
+    if (!ctx || !img?.complete || img.naturalWidth === 0 || W === 0 || H === 0) return;
 
     ctx.save();
     ctx.scale(dpr, dpr);
