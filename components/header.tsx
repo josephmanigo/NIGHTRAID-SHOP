@@ -25,10 +25,10 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { scrollY } = useScroll();
-  const letterSpacing = useTransform(scrollY, [0, 200], ["-0.05em", "0.25em"]);
-  const rotateX = useTransform(scrollY, [0, 200], ["0deg", "45deg"]);
-  const scale = useTransform(scrollY, [0, 200], [1, 1.15]);
-  const y = useTransform(scrollY, [0, 200], [0, -5]);
+  const letterSpacing = useTransform(scrollY, [0, 200], ["0.1em", "0.25em"]);
+  const rotateX = useTransform(scrollY, [0, 200], ["15deg", "35deg"]);
+  const scale = useTransform(scrollY, [0, 200], [1.05, 1.15]);
+  const y = useTransform(scrollY, [0, 200], [0, -3]);
 
   const totalItems = useCartStore((state) => state.getTotalItems());
   // Hydration fix for zustand
