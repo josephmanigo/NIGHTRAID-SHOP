@@ -33,9 +33,9 @@ export const GlassEffect: React.FC<GlassEffectProps> = ({
       style={glassStyle}
     >
       {/* Glass Layers */}
-      <div className={`absolute inset-0 transition-opacity duration-500 rounded-inherit ${showGlass ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`absolute inset-0 transition-opacity duration-500 rounded-inherit pointer-events-none ${showGlass ? 'opacity-100' : 'opacity-0 max-md:opacity-100'}`}>
         <div
-          className="absolute inset-0 z-0 overflow-hidden"
+          className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
           style={{
             backdropFilter: "blur(3px)",
             filter: "url(#glass-distortion)",
@@ -44,11 +44,11 @@ export const GlassEffect: React.FC<GlassEffectProps> = ({
           }}
         />
         <div
-          className="absolute inset-0 z-10"
+          className="absolute inset-0 z-10 pointer-events-none"
           style={{ background: "rgba(255, 255, 255, 0.05)", borderRadius: "inherit" }}
         />
         <div
-          className="absolute inset-0 z-20 overflow-hidden"
+          className="absolute inset-0 z-20 overflow-hidden pointer-events-none"
           style={{
             boxShadow:
               "inset 2px 2px 1px 0 rgba(255, 255, 255, 0.15), inset -1px -1px 1px 1px rgba(255, 255, 255, 0.05)",

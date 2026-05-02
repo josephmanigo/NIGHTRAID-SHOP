@@ -103,7 +103,7 @@ export function Header() {
       <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-3xl transition-all duration-500">
         <GlassEffect 
           showGlass={isScrolled}
-          className={`w-full rounded-full border transition-colors duration-500 ${
+          className={`w-full rounded-full border transition-colors duration-500 max-md:border-white/20 ${
             isScrolled ? "border-white/20" : "border-transparent"
           }`}
         >
@@ -201,7 +201,7 @@ export function Header() {
             <input 
               type="text" 
               placeholder="Search..." 
-              className="absolute right-20 top-2 w-32 bg-black/60 border border-white/20 rounded-full px-3 py-1 text-xs text-white focus:outline-none focus:border-[#cc0000] transition-all animate-in fade-in"
+              className="absolute left-4 right-[140px] top-1/2 -translate-y-1/2 bg-[#0a0a0a] border border-white/20 rounded-full px-4 py-1.5 text-xs text-white focus:outline-none focus:border-[#cc0000] transition-all animate-in fade-in z-40"
               autoFocus
               onBlur={() => setIsSearchOpen(false)}
               onKeyDown={(e) => {
@@ -214,7 +214,7 @@ export function Header() {
           )}
           <button 
             onClick={() => setIsSearchOpen(!isSearchOpen)}
-            className="text-white hover:text-[#cc0000] transition-colors"
+            className="text-white hover:text-[#cc0000] transition-colors relative z-20 p-2 -m-2"
             aria-label="Search"
           >
             <Search size={20} />
@@ -222,25 +222,25 @@ export function Header() {
 
           <button
             onClick={handleUserClick}
-            className="text-white hover:text-[#cc0000] transition-colors"
+            className="text-white hover:text-[#cc0000] transition-colors relative z-20 p-2 -m-2"
             aria-label="Account"
           >
             <User size={20} />
           </button>
           <button 
             onClick={() => useCartStore.getState().setIsCartOpen(true)}
-            className="text-white hover:text-[#cc0000] transition-colors relative" 
+            className="text-white hover:text-[#cc0000] transition-colors relative z-20 p-2 -m-2" 
             aria-label="Open Cart"
           >
             <ShoppingBag size={20} />
             {mounted && totalItems > 0 && (
-              <span className="absolute -top-1.5 -right-2 bg-[#cc0000] text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center animate-in zoom-in">{totalItems}</span>
+              <span className="absolute top-0 right-0 bg-[#cc0000] text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center animate-in zoom-in">{totalItems}</span>
             )}
           </button>
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="transition-colors text-white"
+            className="transition-colors text-white relative z-20 p-2 -m-2"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}

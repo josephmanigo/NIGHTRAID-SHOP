@@ -9,14 +9,14 @@ import { createClient } from "@/lib/supabase/client";
 
 const getCartImage = (name: string) => {
   const lowerName = name.toLowerCase();
-  if (lowerName.includes("headset") || lowerName.includes("hyperx")) return "/images/headset cart.png";
-  if (lowerName.includes("jersey") && lowerName.includes("pink")) return "/images/jersey pink.png";
-  if (lowerName.includes("jersey") && lowerName.includes("red")) return "/images/jersey red.png";
-  if (lowerName.includes("jersey")) return "/images/jersey pink.png";
-  if (lowerName.includes("keyboard") || lowerName.includes("aspas")) return "/images/keyboard cart.png";
-  if (lowerName.includes("mousepad") || lowerName.includes("mouse pad")) return "/images/mousepad cart.png";
-  if (lowerName.includes("mouse") || lowerName.includes("superlight") || lowerName.includes("superstrike")) return "/images/mouse cart.png";
-  if (lowerName.includes("tee")) return "/images/tee cart.png";
+  if (lowerName.includes("headset") || lowerName.includes("hyperx")) return "/images/headset%20cart.png";
+  if (lowerName.includes("jersey") && lowerName.includes("pink")) return "/images/jersey%20pink.png";
+  if (lowerName.includes("jersey") && lowerName.includes("red")) return "/images/jersey%20red.png";
+  if (lowerName.includes("jersey")) return "/images/jersey%20pink.png";
+  if (lowerName.includes("keyboard") || lowerName.includes("aspas")) return "/images/keyboard%20cart.png";
+  if (lowerName.includes("mousepad") || lowerName.includes("mouse pad")) return "/images/mousepad%20cart.png";
+  if (lowerName.includes("mouse") || lowerName.includes("superlight") || lowerName.includes("superstrike")) return "/images/mouse%20cart.png";
+  if (lowerName.includes("tee")) return "/images/tee%20cart.png";
 
   return "/images/logo.png";
 };
@@ -47,7 +47,7 @@ export function CartSidebar() {
       {/* Sidebar */}
       <div
         className={cn(
-          "fixed top-0 right-0 h-full w-full sm:w-[400px] bg-[#0a0a0a] border-l border-white/10 z-[110] transition-transform duration-300 ease-in-out flex flex-col",
+          "fixed top-0 right-0 h-[100dvh] w-full sm:w-[400px] bg-[#0a0a0a] border-l border-white/10 z-[110] transition-transform duration-300 ease-in-out flex flex-col",
           isCartOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
@@ -121,7 +121,7 @@ export function CartSidebar() {
 
         {/* Footer / Checkout */}
         {items.length > 0 && (
-          <div className="p-6 border-t border-white/10 bg-black/50">
+          <div className="p-6 pb-12 sm:pb-6 border-t border-white/10 bg-black/50">
             <div className="flex items-center justify-between mb-6">
               <span className="text-white/50 uppercase font-bold tracking-widest text-sm">Total</span>
               <span className="text-2xl font-black text-white">${getCartTotal().toFixed(2)}</span>

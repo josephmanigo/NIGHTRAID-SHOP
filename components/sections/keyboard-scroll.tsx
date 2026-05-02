@@ -128,8 +128,8 @@ export function KeyboardScroll() {
     const imgs: HTMLImageElement[] = [];
 
     // 1. Identify which frame we should show FIRST (based on current scroll)
-    const currentProgress = scrollYProgress.get();
-    const initialIndex = Math.round(currentProgress * (TOTAL_FRAMES - 1));
+    const currentProgress = scrollYProgress.get() || 0;
+    const initialIndex = Math.round(currentProgress * (TOTAL_FRAMES - 1)) || 0;
 
     // 2. Load the initial frame with priority
     const priorityImg = new Image();
@@ -137,8 +137,16 @@ export function KeyboardScroll() {
     priorityImg.onload = () => {
       imgs[initialIndex] = priorityImg;
       imagesRef.current = imgs;
+      
+      // Force a resize right before drawing the first frame (fixes mobile layout race conditions)
+      resizeCanvas();
       drawFrame(initialIndex);
       setShowCanvas(true);
+      
+      // Double check the draw after the next paint
+      requestAnimationFrame(() => {
+        drawFrame(initialIndex);
+      });
       
       // 3. Once priority frame is shown, load the rest
       loadRemaining();

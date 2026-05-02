@@ -34,45 +34,44 @@ const AnimatedFeatureSpotlight = React.forwardRef<HTMLElement, AnimatedFeatureSp
       <section
         ref={ref}
         className={cn(
-          'w-full max-w-6xl mx-auto p-8 md:p-12 rounded-3xl bg-black border border-white/10 overflow-hidden', // Added overflow-hidden for cleaner animations
+          'relative w-full max-w-3xl mx-auto p-10 md:p-16 rounded-3xl bg-[#050505] border border-white/10 overflow-hidden',
           className
         )}
         aria-labelledby="feature-spotlight-heading"
         {...props}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left Column: Animated Text Content */}
-          <div className="flex flex-col space-y-6 text-center md:text-left items-center md:items-start">
-            <div
-              className="flex items-center space-x-2 text-sm font-bold text-[#ff0000] uppercase tracking-widest animate-in fade-in slide-in-from-top-4 duration-700"
-            >
-              {preheaderIcon}
-              <span>{preheaderText}</span>
-            </div>
-            <h2
-              id="feature-spotlight-heading"
-              className="text-3xl lg:text-4xl font-black tracking-tight text-white uppercase animate-in fade-in slide-in-from-top-4 duration-700 delay-150"
-            >
-              {heading}
-            </h2>
-            <p className="text-base text-white/70 leading-relaxed animate-in fade-in slide-in-from-top-4 duration-700 delay-300">
-              {description}
-            </p>
-            <div className="animate-in fade-in slide-in-from-top-4 duration-700 delay-400">
-              <Button size="lg" className="rounded-full font-bold uppercase tracking-widest bg-white text-black hover:bg-white/90" {...buttonProps}>
-                {buttonText}
-              </Button>
-            </div>
-          </div>
+        {/* Subtle Ambient Glow */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[#cc0000]/5 blur-[100px] rounded-full"></div>
+        </div>
 
-          {/* Right Column: Animated Visual */}
-          <div className="relative w-full min-h-[250px] md:min-h-[320px] flex items-center justify-center animate-in fade-in zoom-in-95 duration-700 delay-200">
-            {/* Main Image with both entrance and continuous animations */}
-            <img
-              src={imageUrl}
-              alt={imageAlt}
-              className="w-full max-w-sm object-contain animate-pulse"
-            />
+        <div className="relative z-10 flex flex-col items-center text-center space-y-8">
+          <div
+            className="flex items-center justify-center space-x-2 text-sm font-black text-[#cc0000] uppercase tracking-[0.2em] animate-in fade-in slide-in-from-top-4 duration-700"
+          >
+            {preheaderIcon}
+            <span>{preheaderText}</span>
+          </div>
+          
+          <h2
+            id="feature-spotlight-heading"
+            className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-white uppercase animate-in fade-in slide-in-from-top-4 duration-700 delay-150"
+          >
+            {heading}
+          </h2>
+          
+          <p className="text-base md:text-lg text-white/60 leading-relaxed max-w-2xl animate-in fade-in slide-in-from-top-4 duration-700 delay-300">
+            {description}
+          </p>
+          
+          <div className="pt-6 w-full sm:w-auto animate-in fade-in slide-in-from-top-4 duration-700 delay-400">
+            <Button 
+              size="lg" 
+              className="w-full sm:w-64 py-6 rounded-full font-black uppercase tracking-[0.2em] text-white bg-[#8b0000] hover:bg-[#aa0000] transition-all hover:scale-105 border border-[#ff0000]/20" 
+              {...buttonProps}
+            >
+              {buttonText}
+            </Button>
           </div>
         </div>
       </section>
